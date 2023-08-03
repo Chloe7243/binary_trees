@@ -9,14 +9,16 @@
  *         NULL if there is no ancestor node
  */
 
-binary_tree_t *binary_trees_ancestor(const binary_tree_t *first, const binary_tree_t *second)
+binary_tree_t *binary_trees_ancestor(const binary_tree_t *first,
+		const binary_tree_t *second)
 {
 	size_t fdepth, sdepth;
+
 	if (!first || !second)
 		return (NULL);
 
 	if (first == second)
-		return ((binary_tree_t*)first);
+		return ((binary_tree_t *)first);
 	fdepth = binary_tree_depth(first);
 	sdepth = binary_tree_depth(second);
 
@@ -24,11 +26,11 @@ binary_tree_t *binary_trees_ancestor(const binary_tree_t *first, const binary_tr
 		return (binary_trees_ancestor(first->parent, second));
 	else if (fdepth < sdepth)
 		return (binary_trees_ancestor(first, second->parent));
-	else
+	else if (fdepth == sdepth)
 	{
 		if (first->parent == second->parent)
 			return (first->parent);
-		binary_trees_ancestor(first->parent, second->parent);
+		return (binary_trees_ancestor(first->parent, second->parent));
 	}
 	return (NULL);
 }
