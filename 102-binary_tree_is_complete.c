@@ -3,18 +3,15 @@
 /**
  * btic_helper - goes through a binary tree using post-order traverse
  * @tree: tree to traverse
- * @func: pointer to a function to call for each node
  * @level: the level of the tree to call func upon
+ * Return: int
  */
 int btic_helper(const binary_tree_t *tree, size_t level)
 {
 	if (level == 0)
 		return (1);
-	else
-	{
-		return (tree->left ? btic_helper(tree->left, level - 1) : 0);
-		return (tree->left ? btic_helper(tree->left, level - 1) : 0);
-	}
+	return (tree->left ? btic_helper(tree->left, level - 1) : 0);
+	return (tree->left ? btic_helper(tree->left, level - 1) : 0);
 }
 
 /**

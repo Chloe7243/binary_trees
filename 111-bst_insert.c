@@ -1,5 +1,13 @@
 #include "binary_trees.h"
 
+/**
+ * helper - helps
+ * @tree: tree
+ * @parent: parent
+ * @value: value
+ * Return: poiner
+ */
+
 bst_t *helper(bst_t **tree, bst_t *parent, int value)
 {
 	bst_t *node;

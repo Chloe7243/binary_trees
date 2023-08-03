@@ -3,8 +3,9 @@
 /**
  * helper - helps
  * @tree: tree to traverse
- * @minmax: minmax
- *  Return: val
+ * @min: min
+ * @max: max
+ * Return: val
  */
 int helper(const binary_tree_t *tree, int min, int max)
 {
