@@ -9,11 +9,10 @@
 int helper(const binary_tree_t *tree, int min, int max)
 {
 	if (!tree)
-		return(1);
+		return (1);
 
 	if (tree->n > max || tree->n < min)
 		return (0);
-	
 	return (helper(tree->left, min, tree->n - 1) &&
 			helper(tree->right, tree->n + 1, max));
 }
@@ -28,7 +27,6 @@ int helper(const binary_tree_t *tree, int min, int max)
 int binary_tree_is_bst(const binary_tree_t *tree)
 {
 	if (!tree)
-		return(0);
-
+		return (0);
 	return (helper(tree, INT_MIN, INT_MAX));
 }
