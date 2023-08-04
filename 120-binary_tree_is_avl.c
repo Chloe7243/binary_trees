@@ -17,7 +17,7 @@ int is_avl(const binary_tree_t *tree, int min, int max)
 		return (0);
 
 	lheight = tree->left ? 1 + binary_tree_height(tree->left) : 0;
-        rheight = tree->right ? 1 + binary_tree_height(tree->right) : 0;
+	rheight = tree->right ? 1 + binary_tree_height(tree->right) : 0;
 
 	if (abs(lheight - rheight) > 1)
 		return (0);
