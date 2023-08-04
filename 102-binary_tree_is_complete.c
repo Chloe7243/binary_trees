@@ -1,20 +1,6 @@
 #include "binary_trees.h"
 
 /**
- * btic_helper - goes through a binary tree using post-order traverse
- * @tree: tree to traverse
- * @level: the level of the tree to call func upon
- * Return: int
- */
-int btic_helper(const binary_tree_t *tree, size_t level)
-{
-	if (level == 0)
-		return (1);
-	return (tree->left ? btic_helper(tree->left, level - 1) : 0);
-	return (tree->left ? btic_helper(tree->left, level - 1) : 0);
-}
-
-/**
  * binary_tree_is_complete - checks if a binary tree is complete
  * @tree: a pointer to the root node of the tree to check
  *
@@ -24,33 +10,49 @@ int btic_helper(const binary_tree_t *tree, size_t level)
  */
 int binary_tree_is_complete(const binary_tree_t *tree)
 {
-	int is_complete = 0, i, t_height;
+	size_t size;
 
 	if (!tree)
-		return (is_complete);
+		return (0);
+	size = binary_tree_size(tree);
 
-	t_height = binary_tree_height(tree);
-	for (i = 0; i <= t_height; i++)
-		is_complete = btic_helper(tree, i);
-	return (is_complete);
+	return (btic_helper(tree, 0, size));
 }
 
 /**
- * binary_tree_height - measures the height of a binary tree
- * @tree: tree to measure the height of
+ * btic_helper - checks if a binary tree is complete
+ * @tree: a pointer to the root node of the tree to check
+ * @index: node index to check
+ * @size: number of nodes in the tree
  *
- * Return: height of the tree
+ * Return: 1 if the tree is complete
+ *         0 if the tree is not complete
  *         0 if tree is NULL
  */
-size_t binary_tree_height(const binary_tree_t *tree)
+int btic_helper(const binary_tree_t *tree, size_t index, size_t size)
 {
-	size_t leftheight = 0, rightheight = 0;
+	if (!tree)
+		return (1);
 
-	if (!tree || (!tree->right && !tree->left))
+	if (index >= size)
 		return (0);
 
-	leftheight += (1 + binary_tree_height(tree->left));
-	rightheight += (1 + binary_tree_height(tree->right));
+	return (btic_helper(tree->left, 2 * index + 1, size) &&
+		btic_helper(tree->right, 2 * index + 2, size));
+}
 
-	return (leftheight >= rightheight ? leftheight : rightheight);
+/**
+ * binary_tree_size - measures the size of a binary tree
+ * @tree: tree to measure the size of
+ *
+ * Return: size of the tree
+ *         0 if tree is NULL
+ */
+size_t binary_tree_size(const binary_tree_t *tree)
+{
+	if (!tree)
+		return (0);
+
+	return (binary_tree_size(tree->left) +
+		binary_tree_size(tree->right) + 1);
 }
