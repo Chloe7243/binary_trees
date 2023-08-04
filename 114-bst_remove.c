@@ -24,7 +24,7 @@ bst_t *left_most(bst_t *node)
  */
 bst_t *bst_remove(bst_t *root, int value)
 {
-	bst_t *tmp = NULL;
+	bst_t *repl;
 
 	if (!root)
 		return (NULL);
@@ -35,19 +35,19 @@ bst_t *bst_remove(bst_t *root, int value)
 		root->right = bst_remove(root->right, value);
 	else
 	{
-		if (node->right)
+		if (root->right)
 		{
-			repl = left_most(node->right);
-			node->n = repl->n;
+			repl = left_most(root->right);
+			root->n = repl->n;
 		}
 		else
 		{
-			repl = node->left;
-			if (node->parent)
-				node->parent->right = repl;
+			repl = root->left;
+			if (root->parent)
+				root->parent->right = repl;
 			else
 				root = repl;
-			repl->parent = node->parent;
+			repl->parent = root->parent;
 		}
 	}
 	return (root);
